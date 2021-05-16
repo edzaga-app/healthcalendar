@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -6,10 +8,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
+  className = 'NavComponent';
   isOpen = true;
-  constructor() { }
+  token: string;
+  tokenValidate = false;
+
+  constructor(activatedRoute: ActivatedRoute,
+    private authService: AuthService) { 
+      this.token = activatedRoute?.snapshot?.firstChild?.params?.token;
+      this.tokenValidate = this.initializedSettings();
+    }
 
   ngOnInit(): void {
+  }
+
+  initializedSettings(): boolean {
+    let res = false;
+    try {
+      const urlSegment = window.location.href.split('/');
+      const indexUrl = urlSegment.length;
+
+      if (indexUrl <= 0) return res; 
+      const urlToken = urlSegment[indexUrl - 1];
+
+      if (this.token !== urlToken) return res;
+      window.history.replaceState(null, null, window.location.href.replace(`/${this.token}`, ''));
+      this.authService.auth(this.token);
+      res = true;
+
+    } catch (err) {
+      console.error(`Error en ${this.className} => `, err);
+    }
+    return res;
   }
 
   public toggleSideNav() {

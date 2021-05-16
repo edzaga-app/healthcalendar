@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavComponent } from './core/components/nav/nav.component';
 import { navRoutes } from './nav-routing';
 
-export const sideNavPath = 'utpsalud';
+export const sideNavPath = 'app';
 
 const routes: Routes = [
   {

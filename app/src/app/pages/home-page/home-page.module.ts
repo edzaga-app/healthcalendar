@@ -4,16 +4,18 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { HomePageComponent } from './home-page.component';
-
+import { PhotoModule } from 'src/app/core/components/photo/photo.module';
+import { ButtonScheduleComponent } from './button-schedule/button-schedule.component';
 
 
 @NgModule({
-  declarations: [ HomePageComponent ],
+  declarations: [ HomePageComponent, ButtonScheduleComponent ],
   imports: [
     CommonModule,
     HomePageRoutingModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    PhotoModule
   ],
   entryComponents:[],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
