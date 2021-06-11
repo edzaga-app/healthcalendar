@@ -28,7 +28,7 @@ class HealthCalendarController implements Route {
     this.router.get(`${this.path}/appointments/:id`, this.authMiddleware.auth, this.getAppointmens);
     this.router.post(`${this.path}/saveappointment`, this.authMiddleware.auth, this.saveAppointmen);
     
-    this.router.get(`${this.path}/calendar`, this.authMiddleware.auth, this.calendar);
+    //this.router.get(`${this.path}/calendar`, this.authMiddleware.auth, this.calendar);
     
   }
 
