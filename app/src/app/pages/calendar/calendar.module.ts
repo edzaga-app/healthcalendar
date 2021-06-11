@@ -9,6 +9,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { MatToolbarDialogComponent } from '../../core/components/mat-toolbar-dialog/mat-toolbar-dialog.component';
+import { ModalCalendarComponent } from './modal-calendar/modal-calendar.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -18,7 +20,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [CalendarComponent, MatToolbarDialogComponent, ModalCalendarComponent],
   imports: [
     CommonModule,
     CalendarRoutingModule,
@@ -26,7 +28,7 @@ FullCalendarModule.registerPlugins([
     MaterialModule,
     FlexLayoutModule
   ],
-  entryComponents:[],
+  entryComponents:[ModalCalendarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CalendarModule { }

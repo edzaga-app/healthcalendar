@@ -1,5 +1,6 @@
 import { Route, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import { AuthGuard } from './auth/auth.guard';
 
 export interface NavRoute extends Route {
     path?: string;
@@ -7,6 +8,8 @@ export interface NavRoute extends Route {
     group?: string;
     groupedNavRoutes?: NavRoute[];
 }
+
+export const sideNavPath = 'app';
 
 export const navRoutes: NavRoute[] = [
   {
@@ -17,13 +20,14 @@ export const navRoutes: NavRoute[] = [
       import('./pages/home-page/home-page.module').then(
         m => m.HomePageModule,
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'calendario/:thirdpartyId',
     loadChildren: () =>
       import('./pages/calendar/calendar.module').then(
         m => m.CalendarModule
-      ),
+      )
   },
   {
     path: '',

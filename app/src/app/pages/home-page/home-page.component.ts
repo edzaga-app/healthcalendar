@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import AppointmentType from 'src/app/core/models/appointmentType';
 import Professionals from 'src/app/core/models/profesionals';
+import { SpinnerService } from 'src/app/core/services/http/spinner.service';
 import { HomePageService } from 'src/app/core/services/pages/home-page.service';
+import { StorageService } from 'src/app/core/services/storage/storage.service';
+import { StorageKey } from 'src/app/core/services/storage/storage.model';
+
+const { PROFESSIONAL_INFO } = StorageKey;
 
 @Component({
   selector: 'app-home-page',
@@ -10,45 +16,66 @@ import { HomePageService } from 'src/app/core/services/pages/home-page.service';
 })
 export class HomePageComponent implements OnInit {
   className = 'HomePageComponent';
-  step: number = 0;
   professionals: AppointmentType[];
-  
-  constructor(private homePageService: HomePageService) { }
+  professional: Professionals;
 
-  ngOnInit(): void {
-    this.getProfessionals();
-
+  constructor(
+    private homePageService: HomePageService,
+    private snackBar: MatSnackBar,
+    private spinnerService: SpinnerService,
+    private storage: StorageService,
+  ) {
+    this.tokenValidate();
+    this.storage.remove(PROFESSIONAL_INFO);  
   }
 
-  setSchedule(professional: Professionals) {
-    
-    console.log(professional);
-    
+  ngOnInit(): void {
+     this.getProfessionals();
   }
 
   private async getProfessionals() {
     let res = null;
-    let body = new Object();
+    this.spinnerService.show();
     try {
-      body = { evaluationId: 202 };
-      res = await this.homePageService.getProfessionals(body);
+      res = await this.homePageService.getProfessionals();
       this.professionals = res;
+      this.spinnerService.hide();
+
     } catch (err) {
+      this.spinnerService.hide();
+      this.validateError(err);
       console.error(`Error en ${this.className} => getProfessionals`, err);
     }
     return res;
   }
 
-  setStep(index: number) {
-    this.step = index;
+  sharedProfessionalInfo(professional: Professionals) {
+    this.storage.save(PROFESSIONAL_INFO, professional);
+  }
+  
+  message(message: string) {
+    this.snackBar.open(message, null, {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['inter-line']
+    })
   }
 
-  nextStep() {
-    this.step++;
+  validateError(err: any) {
+    if (!err?.error.auth) {
+      this.message(`La Sesión a expirado por inactividad prolongada. \n
+                 Por favor inicie nuevamente sesión en el Portal Estudiantil`);
+      setTimeout(() => {
+        window.location.href = 'https://app4.utp.edu.co/pe/';
+      }, 3100);
+    }
   }
 
-  prevStep() {
-    this.step--;
+  tokenValidate() {
+    if(!this.homePageService.token) return;
+    window.history.replaceState(null, null, window.location.href.replace(`/${this.homePageService.token}`, ''));
   }
+
+
 
 }

@@ -8,7 +8,7 @@
       "type": "pwa-chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
-      "url": "http://localhost:4200/app/inicio/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjYwNTk0LCJpYXQiOjE2MjExMjE5NTEsImV4cCI6MTYyMTIwODM1MX0.Dgl-tlkNjVIFMgcxXjn4C0i_zXlgXVLXVN2cz-dTOpk",
+      "url": "http://localhost:4200/app/inicio/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjYwNTk0LCJpYXQiOjE2MjMzNTY2MzEsImV4cCI6MTYyMzQ0MzAzMX0.vvqwuJWA7iMA2H-MGenhOS9OZYhCMgb51zIpQkXMlqY",
       "webRoot": "${workspaceFolder}"
     }
   ]

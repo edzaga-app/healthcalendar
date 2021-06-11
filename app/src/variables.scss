@@ -39,8 +39,8 @@ body {
 
 .box-content-wrapper{
   border: 1px solid rgba(0,0,0,.03) !important;
-    box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12) !important;
-    margin: 4px !important;
+  box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12) !important;
+  margin: 4px !important;
 }
 
 .box-content-title {
@@ -55,10 +55,20 @@ body {
 
 .box-content-title-spacer {
   flex: 1 1 auto;
+  text-shadow: 4px 4px 4px #aaa;
 }
 
 .box-content-body {
-  padding: 30px;
+  padding-left: 30px;
+  padding-top: 14px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  background-color: #fafafa !important;
+}
+
+.box-content-calendar {
+  padding-top: 15px;
+  padding-left: 30px;
   background-color: #fafafa !important;
 }
 
@@ -139,5 +149,16 @@ mat-checkbox {
 
 .mat-header-cell {
   background-color: #ecf0f5 !important;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(74, 74, 74, 0.31);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 

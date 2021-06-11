@@ -19,7 +19,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { from } from 'rxjs';
 
 @NgModule({
   imports:[

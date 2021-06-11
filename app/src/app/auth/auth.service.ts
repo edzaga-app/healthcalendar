@@ -3,7 +3,7 @@ import { CrudService } from '../core/services/http/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../core/services/storage/storage.service';
 import { StorageKey } from '../core/services/storage/storage.model';
-const { AUTH_TOKEN, USER_INFO } = StorageKey;
+const { AUTH_TOKEN, USER_INFO, PROFESSIONAL_INFO } = StorageKey;
 
 @Injectable({
     providedIn: 'root',
@@ -73,6 +73,7 @@ export class AuthService extends CrudService {
     this.token = '';
     this.storage.remove(AUTH_TOKEN);
     this.storage.remove(USER_INFO);
+    this.storage.remove(PROFESSIONAL_INFO);
   }
 
   public isLogged(): boolean {

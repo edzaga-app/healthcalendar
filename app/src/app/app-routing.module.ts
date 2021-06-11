@@ -1,21 +1,31 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { 
+  RouterModule, 
+  Routes,
+  PreloadAllModules
+} from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
 import { NavComponent } from './core/components/nav/nav.component';
-import { navRoutes } from './nav-routing';
+import { navRoutes, sideNavPath } from './nav-routing';
 
-export const sideNavPath = 'app';
 
 const routes: Routes = [
   {
     path: sideNavPath,
     component: NavComponent,
-    children: navRoutes
-  }
-
+    children: navRoutes,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'inicio/:token',
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

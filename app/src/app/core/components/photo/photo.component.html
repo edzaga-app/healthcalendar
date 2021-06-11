@@ -1,3 +1,8 @@
 <div class="center">
-  <img #thirdPartyImage class="profile-photo center" alt="Profesional">
+  <img #thirdPartyImage
+       class="profile-photo center" 
+       alt="">
+
+  <img [@photoAnimated]="statePhoto" *ngIf="preloadPhoto" src="assets/img/load-photo.gif" class="profile-nophoto center" alt="">
 </div>
+

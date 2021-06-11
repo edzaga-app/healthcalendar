@@ -66,6 +66,51 @@ class CrudRepository {
     return res;
   }
 
+  //para construir un sp con parametros de salida se debe crear la propiedad output en el objeto o interface como parametro de salida
+  public async save(query: string, param: any): Promise<any> {
+    let res = null;
+    let conn;
+    let outputParameter = false;
+    try {
+      // Valida que contenga los parámetros para insertar o guardar
+      if (!param) return res;
+      // Si el procedimiento requiere parámetros de salida, lo construye
+      if (param?.output) {
+        outputParameter = true;
+        param.output = { dir: oracledb.BIND_OUT, type: oracledb.NUMBER | oracledb.STRING };
+      }
+
+      conn = await oracledb.getConnection(db);
+      const result = await conn.execute(
+        query,
+        { 
+          scheduleId: Number(param.scheduleId),
+          userId: param.userId,
+          appointmentId: param.appointmentId,
+          hstdateStart: new Date(param.hstdateStart),
+          id: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER }
+        },
+        { 
+          autoCommit: false 
+        } 
+      );
+
+      res = result.outBinds;
+      await conn.commit();  
+
+    } catch (err) {
+      console.error(`Error en ${this.className} => save`, err);
+      await conn?.rollback();
+    } finally {
+      if (conn) {
+        await conn.close();
+      }
+    }
+    return res;
+  }
+
+
+
 
 }
 

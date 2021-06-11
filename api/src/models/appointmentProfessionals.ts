@@ -1,3 +1,4 @@
+
 interface AppointmetProfessional {
   id: number;
   professionType?: string;
@@ -5,6 +6,7 @@ interface AppointmetProfessional {
   name?: string;
   profession?: string;
   appointmentId?: number;
+  photo?: any;
 }
 
 export default AppointmetProfessional;

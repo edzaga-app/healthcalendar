@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BaseService } from '../../services/http/base.service';
+import { } from '../../../auth/auth.service';
 
 export abstract class CrudService<T = any> extends BaseService {
-    abstract endpoint;
+    abstract endpoint: string;
     
     protected constructor(protected http: HttpClient) {
         super(http)
@@ -28,7 +29,7 @@ export abstract class CrudService<T = any> extends BaseService {
         return this.get<T>('' + id);
     }
 
-    public async post(body): Promise<any> {
+    public async post(body: any): Promise<any> {
         let response = null;
         try {
             response = await this.http

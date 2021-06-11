@@ -1,6 +1,9 @@
+import Professionals from "./profesionals";
+
 interface AppointmentType {
     id: string;
-    name: string;
+    profession: string;
+    proffesionals?: Professionals[];
 }
 
 export default AppointmentType;

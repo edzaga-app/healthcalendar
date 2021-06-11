@@ -2,7 +2,8 @@
   <div fxLayout="column">
     <div class="box-content-wrapper">
       <div class="box-content-title">
-        <div class="box-content-title-spacer"><strong>Agendamiento de Citas (Salud Integral)</strong>
+        <div class="title-spacer">
+          <strong>Agendamiento de Citas (Salud Integral)</strong>
         </div>
       </div>
       <div class="box-content-body">
@@ -11,12 +12,12 @@
             <div fxFlex="100">
               <mat-accordion>
                 <mat-expansion-panel hideToggle *ngFor="let item of professionals">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
+                  <mat-expansion-panel-header class="">
+                    <mat-panel-title class="font-label">
                       <mat-icon class="material-icons">event_available</mat-icon>
                     </mat-panel-title>
-                    <mat-panel-description>
-                      {{ item.profession }}
+                    <mat-panel-description class="font-label">
+                      <strong>{{ item.profession }}</strong>
                     </mat-panel-description>
                   </mat-expansion-panel-header> 
                   <div class="container-card">
@@ -25,16 +26,10 @@
                         <div class="profile-background"></div>
                         <mat-card-content>
                           <app-photo [thirdPartyId]="professional.id"></app-photo> 
-                          <p style="text-align: center; color: rgba(0, 0, 0, .8)"><b>{{ professional.name }}</b></p>
-                          <p style="text-align: center;">{{ professional.profession }}</p>
-                          <a mat-button color="primary" class="center" [routerLink]="[ '/app/calendario', professional.id ]">Agendar</a>
-                          <!-- <button class="center" mat-raised-button color="primary" route>Agendar</button> -->
+                          <p class="professional-name"><b>{{ professional.name }}</b></p>
+                          <p class="profession">{{ professional.profession }}</p>
+                          <a mat-button color="primary" class="center border-button" (click)="sharedProfessionalInfo(professional)" [routerLink]="[ '/app/calendario', professional.id ]">Agendar</a>
                         </mat-card-content>
-                        <!-- <mat-card-actions align="center"> -->
-                          <!-- <app-button-schedule [professional]=""></app-button-schedule> -->
-                          <!-- <button mat-raised-button color="primary" route>Agendar</button> -->
-                          <!-- <a [routerLink]="[ '/app/calendario', professional.id ]">Agendar</a> -->
-                        <!-- </mat-card-actions> -->
                       </mat-card>
                     </div>
                   </div>

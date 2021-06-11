@@ -1,11 +1,28 @@
 import AppointmetProfessional from "../models/appointmentProfessionals";
 import AppointmentType from "../models/appointmentType";
+import ScheduleAppointment from "../models/scheduleAppointment";
 import HealthCalendarRepository from "../repository/healthCalendarRepository";
 
 class HealthCalendarUseCase extends HealthCalendarRepository {
   
   constructor(){
     super();
+  }
+
+  public async saveAppointment(scheduleAppointment: ScheduleAppointment) {
+    let res = null;
+    try {
+      if (!scheduleAppointment.appointmentId ||
+          !scheduleAppointment.scheduleId ||
+          !scheduleAppointment.hstdateStart ||
+          !scheduleAppointment.userId) return res;
+      
+      res = await this.addAppointment(scheduleAppointment);
+      
+    } catch (err) {
+      console.error(`Error en ${this.className} => saveAppointment`, err);
+    }
+    return res;
   }
 
   public async professionals() {
@@ -43,6 +60,10 @@ class HealthCalendarUseCase extends HealthCalendarRepository {
       console.error(`Error en ${this.className} => getPhoto`, err);
     }
     return res;
+  }
+
+  public getUserId(req: any) {
+    return (req.user?.id) ? req.user?.id : 0;
   }
 
 }

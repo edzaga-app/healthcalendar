@@ -7,6 +7,7 @@ import RelationAppointmentType from '../models/relationAppointmentType';
 import AppointmetProfessional from '../models/appointmentProfessionals';
 import oracledb from 'oracledb';
 import db from '../config/database';
+import ScheduleAppointment from '../models/scheduleAppointment';
 
 class HealthCalendarRepository extends CrudRepository {
   className = 'HealthCalendarRepository';
@@ -15,10 +16,32 @@ class HealthCalendarRepository extends CrudRepository {
     super();
   }
 
+  public async addAppointment(scheduleAppointment: ScheduleAppointment) {
+    let res = null;
+    let query: string;
+    try {
+      query = `
+        BEGIN 
+          PKG_SAL_STUDENTS.SP_APLICARCITA(
+            :scheduleId,
+            :userId,
+            :appointmentId, 
+            :hstdateStart,
+            :id
+          ); 
+        END;`;
+      res = await this.save(query, scheduleAppointment);
+
+    } catch (err) {
+      console.error(`Error en ${this.className} => saveAppointment`, err);
+    }
+    return res;
+  }
+
   public async getAppointmens(id: number | string) {
     let res = null;
     let query: string;
-    let bind: string[] = [];
+    let bind: string[] = [];  
     try {
       if(!id) return res;
       bind.push(id.toString());
@@ -30,7 +53,34 @@ class HealthCalendarRepository extends CrudRepository {
     }
     return res;
   }
-  
+
+  public async getAppointmens2(id: number | string) {
+    let res = null;
+    let conn;
+    let value: any;
+    try {
+      conn = await oracledb.getConnection(db);
+      const result = await conn.execute(
+        `SELECT * FROM TABLE(PKG_SAL_STUDENTS.FUN_OBTENERCITAS(:id))`,
+        [id],
+        { resultSet: true }
+      );
+
+      if (result.rows?.length! > 0) {
+        value = result.rows;
+        res = value[0][0];
+      }
+
+    } catch (err) {
+      console.error(`Error en ${this.className} => getValue`, err);
+    } finally {
+      if (conn) {
+        await conn.close();
+      }
+    }
+    return res;
+  }
+
   /**
    * Obtiene la foto de un tercero
    * @param id Id del tercero 
