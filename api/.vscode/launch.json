@@ -12,6 +12,8 @@
                 "<node_internals>/**"
             ],
             "program": "${file}",
+            "runtimeArgs": ["-r", "ts-node/register/transpile-only"], //nuevo
+            "args": ["app"], //nuevo
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
