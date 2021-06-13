@@ -5,7 +5,7 @@ import { StorageService } from '../storage/storage.service';
 import { StorageKey } from '../storage/storage.model';
 import Appointment from '../../models/appointment';
 
-const {AUTH_TOKEN} = StorageKey;
+const { AUTH_TOKEN } = StorageKey;
 
 @Injectable({
   providedIn: 'root'
