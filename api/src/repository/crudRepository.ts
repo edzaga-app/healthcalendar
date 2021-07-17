@@ -88,6 +88,7 @@ class CrudRepository {
           userId: param.userId,
           appointmentId: param.appointmentId,
           hstdateStart: new Date(param.hstdateStart),
+          professionalId: param.professionalId,
           id: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER }
         },
         { 
@@ -99,8 +100,13 @@ class CrudRepository {
       await conn.commit();  
 
     } catch (err) {
-      console.error(`Error en ${this.className} => save`, err);
       await conn?.rollback();
+      res = {
+        id: Number(`-${err.errorNum}`),
+        error: err.message.split('\n')[0].replace(`ORA-${err.errorNum}: `, '')
+      }
+      //console.error(`Error en ${this.className} => save`, err);
+      
     } finally {
       if (conn) {
         await conn.close();

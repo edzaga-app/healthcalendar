@@ -20,14 +20,14 @@
                       <strong>{{ item.profession }}</strong>
                     </mat-panel-description>
                   </mat-expansion-panel-header> 
-                  <div class="container-card">
-                    <div *ngFor="let professional of item.professionals">
+                  <div fxLayout="row wrap" fxLayoutGap="20px">
+                    <div fxFlex="20" *ngFor="let professional of item.professionals">
                       <mat-card class="profile-card mat-elevation-z4">
                         <div class="profile-background"></div>
                         <mat-card-content>
                           <app-photo [thirdPartyId]="professional.id"></app-photo> 
                           <p class="professional-name"><b>{{ professional.name }}</b></p>
-                          <p class="profession">{{ professional.profession }}</p>
+                          <p class="profession">{{ professional.adminProfession }}</p>
                           <a mat-button color="primary" class="center border-button" (click)="sharedProfessionalInfo(professional)" [routerLink]="[ '/app/calendario', professional.id ]">Agendar</a>
                         </mat-card-content>
                       </mat-card>

@@ -16,6 +16,7 @@ import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { StorageKey } from 'src/app/core/services/storage/storage.model'; 
 import { ModalCalendarComponent } from './modal-calendar/modal-calendar.component';
 import Professionals from 'src/app/core/models/profesionals';
+import { DataProfessionalService } from 'src/app/core/services/http/data-professional.service';
 
 const { PROFESSIONAL_INFO } = StorageKey;
 
@@ -41,6 +42,7 @@ export class CalendarComponent implements OnInit {
     private spinnerService: SpinnerService,
     private storage: StorageService,
     public dialog: MatDialog,
+    private dataProfessionalService: DataProfessionalService,
   ) {  }
 
   async ngOnInit(): Promise<void> {
@@ -144,6 +146,7 @@ export class CalendarComponent implements OnInit {
         scheduleId: clickInfo.event.id,
         appointmentId: this.professional?.appointmentId,
         name: this.professional?.name,
+        professionalId: this.professional?.id,
         date: dateAppointment,
         hstdateStart: savedDate, // Se almacena en esta propiedad la fecha en que fue guardada en elk host
         state: false
@@ -155,9 +158,14 @@ export class CalendarComponent implements OnInit {
       if (this.stateAppointmen) {
         clickInfo.event.remove();
       }
-
     });
     
+    this.dataProfessionalService.scheduledAppointment.subscribe(data => {
+      if (data) {
+        clickInfo.event.remove();
+      }
+    });
+
   }
 
 
@@ -171,22 +179,22 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    console.log(selectInfo);
+    //console.log(selectInfo);
     
-    const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
+    // const title = prompt('Please enter a new title for your event');
+    // const calendarApi = selectInfo.view.calendar;
 
-    calendarApi.unselect(); // clear date selection
+    // calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      // calendarApi.addEvent({
-      //   id: createEventId(),
-      //   title,
-      //   start: selectInfo.startStr,
-      //   end: selectInfo.endStr,
-      //   allDay: selectInfo.allDay
-      // });
-    }
+    // if (title) {
+    //   calendarApi.addEvent({
+    //     id: createEventId(),
+    //     title,
+    //     start: selectInfo.startStr,
+    //     end: selectInfo.endStr,
+    //     allDay: selectInfo.allDay
+    //   });
+    // }
   }
 
   

@@ -15,7 +15,8 @@ class HealthCalendarUseCase extends HealthCalendarRepository {
       if (!scheduleAppointment.appointmentId ||
           !scheduleAppointment.scheduleId ||
           !scheduleAppointment.hstdateStart ||
-          !scheduleAppointment.userId) return res;
+          !scheduleAppointment.userId ||
+          !scheduleAppointment.professionalId) return res;
       
       res = await this.addAppointment(scheduleAppointment);
       

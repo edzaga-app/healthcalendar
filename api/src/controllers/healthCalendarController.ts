@@ -34,10 +34,10 @@ class HealthCalendarController implements Route {
 
   private saveAppointmen = async (req: Request, res: Response) => {
     try {
-      const { scheduleId, appointmentId, hstdateStart } = req.body;
+      const { scheduleId, appointmentId, hstdateStart, professionalId } = req.body;
       const userId = this.useCases.getUserId(req);
       const saved = await this.useCases.saveAppointment({
-        scheduleId, appointmentId, hstdateStart, userId
+        scheduleId, appointmentId, hstdateStart, userId, professionalId
       });
       res.send(saved);
       

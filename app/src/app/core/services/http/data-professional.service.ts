@@ -7,6 +7,7 @@ import Professionals from '../../models/profesionals';
 export class DataProfessionalService {
   @Output() dataProfessional: EventEmitter<Professionals> = new EventEmitter();
   @Output() loadPhoto: EventEmitter<boolean> = new EventEmitter();
+  @Output() scheduledAppointment: EventEmitter<boolean> = new EventEmitter();
   
   constructor() { }
 }

@@ -7,6 +7,7 @@ interface AppointmetProfessional {
   profession?: string;
   appointmentId?: number;
   photo?: any;
+  adminProfession?: string;
 }
 
 export default AppointmetProfessional;

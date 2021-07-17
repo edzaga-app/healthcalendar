@@ -3,6 +3,7 @@ interface ScheduleAppointment {
   appointmentId: number;
   hstdateStart: Date;
   userId: number;
+  professionalId: string;
 }
 
 export default ScheduleAppointment;

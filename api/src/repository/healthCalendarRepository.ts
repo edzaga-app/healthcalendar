@@ -27,6 +27,7 @@ class HealthCalendarRepository extends CrudRepository {
             :userId,
             :appointmentId, 
             :hstdateStart,
+            :professionalId,
             :id
           ); 
         END;`;

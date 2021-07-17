@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-     this.getProfessionals();
+    this.getProfessionals();
   }
 
   private async getProfessionals() {
