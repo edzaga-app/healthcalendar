@@ -4,11 +4,12 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    
     {
       "type": "pwa-chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
-      "url": "http://localhost:4200/app/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjYwNTk0LCJpYXQiOjE2MjY0NDA1MzMsImV4cCI6MTYyNjUyNjkzM30.Lnwjbq6Txr84GtLCnmdlibtHdvnEAWnnyepn6FuoVBY",
+      "url": "http://localhost:4200/app/inicio/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjYwNTk0LCJpYXQiOjE2MjczMDc2NjYsImV4cCI6MTYyNzM5NDA2Nn0.v33uQY7rkf3kPqYetH0L5AAouJP-QxoN7ld-3ZKHhuE",
       "webRoot": "${workspaceFolder}"
     }
   ]
