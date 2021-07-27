@@ -29,11 +29,6 @@ import { SpinnerInterceptor } from './core/services/http/spinner.interceptor';
       useClass: HttpConfigInterceptor,
       multi: true
     }
-    // { 
-    //    provide: HTTP_INTERCEPTORS,
-    //    useClass: SpinnerInterceptor,
-    //    multi: true
-    // }
   ],
   bootstrap: [AppComponent]
 })
